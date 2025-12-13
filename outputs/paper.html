@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Details - arXiv CS Daily</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo"><a href="index.html">arXiv CS Daily</a></h1>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="category.html">All Papers</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Categories ▼</a>
+                    <div class="dropdown-content" id="categoryDropdown"></div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <div class="paper-detail" id="paperDetail">
+            <!-- Paper details will be dynamically loaded here -->
+        </div>
+
+        <div class="citation-section">
+            <h2>Citation</h2>
+            
+            <div class="citation-box">
+                <h3>BibTeX</h3>
+                <pre id="bibtexCitation" class="citation-content"></pre>
+                <button onclick="copyCitation('bibtex')" class="btn btn-secondary">Copy BibTeX</button>
+            </div>
+
+            <div class="citation-box">
+                <h3>Standard Citation</h3>
+                <p id="standardCitation" class="citation-content"></p>
+                <button onclick="copyCitation('standard')" class="btn btn-secondary">Copy Citation</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 arXiv CS Daily. Data sourced from arXiv.org</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Load paper details when page loads
+        const urlParams = new URLSearchParams(window.location.search);
+        const paperId = urlParams.get('id');
+        loadPaperDetails(paperId);
+    </script>
+</body>
+</html>

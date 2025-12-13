@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arXiv CS Daily</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">arXiv CS Daily</h1>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="category.html">All Papers</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Categories ▼</a>
+                    <div class="dropdown-content" id="categoryDropdown"></div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1 class="hero-title">arXiv CS Daily</h1>
+            <p class="hero-subtitle">Track the latest computer science research papers from arXiv.org</p>
+            <p class="hero-description">Browse by category or view the most recent submissions across all CS fields.</p>
+            <a href="category.html" class="btn btn-primary">View Latest Papers</a>
+        </div>
+    </header>
+
+    <section class="categories-section">
+        <div class="container">
+            <h2 class="section-title">Computer Science Categories</h2>
+            <p class="section-subtitle">arXiv's Computer Science (cs) archive is organized into the following subject categories:</p>
+            
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Categories will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 arXiv CS Daily. Data sourced from arXiv.org</p>
+            <p>Built with Multi-Agent Code Generation System</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Load categories on homepage
+        loadCategories();
+    </script>
+</body>
+</html>
