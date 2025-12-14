@@ -14,7 +14,7 @@ class CodeGenerationAgent(BaseAgent):
     """Agent responsible for generating code based on task specifications"""
     
     def __init__(self, llm_client: LLMClient, file_tools: FileTools, 
-                 arxiv_tools=None, web_search_tools=None, logger: logging.Logger = None):
+                 arxiv_tools=None, web_search_tools=None, command_tools=None, logger: logging.Logger = None):
         from prompts.system_prompts import CODE_GENERATION_AGENT_PROMPT
         super().__init__(
             role="CodeGenerationAgent",
@@ -25,6 +25,7 @@ class CodeGenerationAgent(BaseAgent):
         )
         self.arxiv_tools = arxiv_tools
         self.web_search_tools = web_search_tools
+        self.command_tools = command_tools
     
     def execute(self, task: Dict[str, Any], context: Dict[str, Any] = None) -> Dict[str, Any]:
         """
@@ -81,6 +82,10 @@ IMPORTANT: You must use the create_file tool to actually create the file. Includ
         # Add web search tools if available
         if self.web_search_tools:
             tools.extend(self.web_search_tools.get_tool_definitions())
+
+        # Add command execution tools if available
+        if self.command_tools:
+            tools.extend(self.command_tools.get_tool_definitions())
         
         # Call LLM with tools
         messages = self.get_messages()
@@ -182,6 +187,16 @@ IMPORTANT: You must use the create_file tool to actually create the file. Includ
             )
         elif tool_name == "fetch_url" and self.web_search_tools:
             return self.web_search_tools.fetch_url(args.get("url", ""))
+
+        # Command execution tools
+        elif tool_name == "run_command" and self.command_tools:
+            return self.command_tools.run_command(
+                command=args.get("command", ""),
+                args=args.get("args", []),
+                timeout_seconds=args.get("timeout_seconds", 20)
+            )
+        elif tool_name == "run_tests" and self.command_tools:
+            return self.command_tools.run_tests()
         
         else:
             return {

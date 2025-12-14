@@ -13,7 +13,7 @@ from tools.file_tools import FileTools
 class EvaluationAgent(BaseAgent):
     """Agent responsible for evaluating code quality and completeness"""
     
-    def __init__(self, llm_client: LLMClient, file_tools: FileTools, logger: logging.Logger = None):
+    def __init__(self, llm_client: LLMClient, file_tools: FileTools, command_tools=None, logger: logging.Logger = None):
         from prompts.system_prompts import EVALUATION_AGENT_PROMPT
         super().__init__(
             role="EvaluationAgent",
@@ -22,6 +22,7 @@ class EvaluationAgent(BaseAgent):
             file_tools=file_tools,
             logger=logger
         )
+        self.command_tools = command_tools
     
     def execute(self, files_to_evaluate: List[str], 
                 requirements: str = None,
@@ -54,6 +55,16 @@ class EvaluationAgent(BaseAgent):
                 "message": "No files could be read for evaluation"
             }
         
+        tests_section = ""
+        if self.command_tools:
+            try:
+                test_results = self.command_tools.run_tests()
+                tests_section = "\nAutomated Checks (run_tests output):\n" + json.dumps(test_results, indent=2)
+                self.add_thought(f"Automated checks status: {test_results.get('status')}")
+            except Exception as e:
+                self.logger.warning(f"run_tests failed: {e}")
+                tests_section = f"\nAutomated Checks: Failed to execute ({e})"
+        
         # Build evaluation prompt
         files_section = "\n\n".join([
             f"File: {path}\n```\n{content}\n```"
@@ -69,6 +80,8 @@ class EvaluationAgent(BaseAgent):
 {files_section}
 
 {requirements_section}
+
+{tests_section}
 
 Provide a comprehensive evaluation covering:
 1. Functionality - Does the code work as intended?

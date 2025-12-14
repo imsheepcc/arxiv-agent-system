@@ -3,12 +3,15 @@ Multi-Agent Orchestrator - Coordinates multiple agents to complete software proj
 """
 import json
 import logging
+import os
 from typing import Dict, Any, List
 from datetime import datetime
 
 from agents.base_agent import PlanningAgent
 from agents.code_agent import CodeGenerationAgent
 from agents.evaluation_agent import EvaluationAgent
+from protocol.message_schema import AgentMessage, MessageType
+from state.state_manager import StateManager
 from tools.llm_client import LLMClient
 from tools.file_tools import FileTools
 
@@ -37,7 +40,21 @@ class MultiAgentOrchestrator:
         
         # Initialize file tools
         self.file_tools = FileTools(base_dir=output_dir)
+
+        # Initialize command tools (restricted execution inside output directory)
+        self.command_tools = None
+        try:
+            from tools.command_tools import CommandTools
+            self.command_tools = CommandTools(base_dir=self.file_tools.base_dir)
+            self.logger.info("Command execution tools enabled")
+        except Exception as e:
+            self.logger.warning(f"Could not initialize command tools: {e}")
         
+        # Initialize state manager (persisted state + memories)
+        state_dir = os.path.join(self.file_tools.base_dir, "state")
+        os.makedirs(state_dir, exist_ok=True)
+        self.state_manager = StateManager(os.path.join(state_dir, "state.json"))
+
         # Initialize arXiv tools
         self.arxiv_tools = None
         if use_arxiv:
@@ -65,9 +82,13 @@ class MultiAgentOrchestrator:
             self.file_tools,
             self.arxiv_tools,
             self.web_search_tools,
+            self.command_tools,
             self.logger
         )
         self.eval_agent = EvaluationAgent(self.llm_client, self.file_tools, self.logger)
+        # Restore agent memories if exists
+        for agent in [self.planning_agent, self.code_agent, self.eval_agent]:
+            self.state_manager.restore_agent_memory(agent)
         
         # Shared state
         self.project_plan = None
@@ -114,6 +135,14 @@ class MultiAgentOrchestrator:
         # Phase 1: Planning
         self.logger.info("\n[PHASE 1] PROJECT PLANNING")
         self.logger.info("-"*80)
+
+        plan_request_msg = AgentMessage.create(
+            msg_type=MessageType.PLAN_REQUEST,
+            sender="Orchestrator",
+            receiver="PlanningAgent",
+            payload={"requirement": requirement}
+        )
+        self.planning_agent.record_protocol_message(plan_request_msg, role="system")
         
         planning_result = self.planning_agent.execute(requirement)
         
@@ -126,6 +155,18 @@ class MultiAgentOrchestrator:
             }
         
         self.project_plan = planning_result["plan"]
+        self.state_manager.update(project_plan=self.project_plan)
+        self.state_manager.record_agent_memory(self.planning_agent)
+        plan_response_msg = AgentMessage.create(
+            msg_type=MessageType.PLAN_RESPONSE,
+            sender="PlanningAgent",
+            receiver="Orchestrator",
+            payload={
+                "project_name": self.project_plan.get("project_name"),
+                "task_count": len(self.project_plan.get("tasks", []))
+            }
+        )
+        self.planning_agent.record_protocol_message(plan_response_msg, role="assistant")
         self.logger.info(f"Project: {self.project_plan.get('project_name', 'Unknown')}")
         self.logger.info(f"Tasks planned: {len(self.project_plan.get('tasks', []))}")
         
@@ -166,8 +207,24 @@ class MultiAgentOrchestrator:
             context = {
                 "project_plan": self.project_plan,
                 "completed_files": self.created_files,
-                "completed_tasks": self.completed_tasks
+                "completed_tasks": self.completed_tasks,
+                "recent_tasks": self.state_manager.get_recent_tasks(),
+                "recent_files": self.state_manager.get_recent_files()
             }
+            
+            assignment_msg = AgentMessage.create(
+                msg_type=MessageType.TASK_ASSIGNMENT,
+                sender="Orchestrator",
+                receiver="CodeGenerationAgent",
+                payload={
+                    "task": task,
+                    "context": {
+                        "completed_tasks": self.completed_tasks,
+                        "completed_files": self.created_files
+                    }
+                }
+            )
+            self.code_agent.record_protocol_message(assignment_msg, role="system")
             
             code_result = self.code_agent.execute(task, context)
             
@@ -176,8 +233,26 @@ class MultiAgentOrchestrator:
                 self.created_files.extend(files)
                 self.completed_tasks.append(task_id)
                 self.task_results[task_id] = code_result
+                self.state_manager.update(
+                    completed_tasks=self.completed_tasks,
+                    created_files=self.created_files,
+                    task_results=self.task_results
+                )
+                self.state_manager.record_agent_memory(self.code_agent)
                 
                 self.logger.info(f"✓ Task {task_id} completed - Files: {', '.join(files)}")
+
+                result_msg = AgentMessage.create(
+                    msg_type=MessageType.TASK_RESULT,
+                    sender="CodeGenerationAgent",
+                    receiver="Orchestrator",
+                    payload={
+                        "task_id": task_id,
+                        "status": "success",
+                        "files_created": files
+                    }
+                )
+                self.code_agent.record_protocol_message(result_msg, role="assistant")
             else:
                 self.logger.error(f"✗ Task {task_id} failed: {code_result.get('message')}")
                 # Continue with other tasks
@@ -187,6 +262,17 @@ class MultiAgentOrchestrator:
         self.logger.info("-"*80)
         
         if self.created_files:
+            eval_request_msg = AgentMessage.create(
+                msg_type=MessageType.EVAL_REQUEST,
+                sender="Orchestrator",
+                receiver="EvaluationAgent",
+                payload={
+                    "files": self.created_files,
+                    "requirement_excerpt": requirement[:200]
+                }
+            )
+            self.eval_agent.record_protocol_message(eval_request_msg, role="system")
+
             eval_result = self.eval_agent.execute(
                 files_to_evaluate=self.created_files,
                 requirements=requirement,
@@ -197,6 +283,8 @@ class MultiAgentOrchestrator:
                 evaluation = eval_result["evaluation"]
                 score = evaluation.get("overall_score", 0)
                 passed = evaluation.get("passed", False)
+                self.state_manager.update(evaluation=evaluation)
+                self.state_manager.record_agent_memory(self.eval_agent)
                 
                 self.logger.info(f"Evaluation Score: {score}/100")
                 self.logger.info(f"Status: {'PASSED' if passed else 'NEEDS IMPROVEMENT'}")
@@ -205,6 +293,18 @@ class MultiAgentOrchestrator:
                     self.logger.info(f"Issues found: {len(evaluation['issues'])}")
                     for issue in evaluation["issues"][:3]:  # Show first 3
                         self.logger.info(f"  - [{issue.get('severity', 'unknown')}] {issue.get('description', '')}")
+                
+                eval_report_msg = AgentMessage.create(
+                    msg_type=MessageType.EVAL_REPORT,
+                    sender="EvaluationAgent",
+                    receiver="Orchestrator",
+                    payload={
+                        "score": score,
+                        "passed": passed,
+                        "issues": evaluation.get("issues", [])
+                    }
+                )
+                self.eval_agent.record_protocol_message(eval_report_msg, role="assistant")
             else:
                 self.logger.warning("Evaluation failed")
                 evaluation = None

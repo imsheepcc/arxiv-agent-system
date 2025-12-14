@@ -6,6 +6,7 @@ import logging
 from typing import Dict, Any, List, Optional
 from datetime import datetime
 
+from protocol.message_schema import AgentMessage
 from tools.llm_client import LLMClient
 from tools.file_tools import FileTools
 
@@ -57,6 +58,14 @@ class BaseAgent:
             "content": content
         })
     
+    def record_protocol_message(self, message: AgentMessage, role: str = "system"):
+        """Record a protocol message (as JSON payload) into conversation history"""
+        if not isinstance(message, AgentMessage):
+            return
+        content = "[PROTOCOL MESSAGE]\n" + message.to_json(pretty=True)
+        self.add_message(role, content)
+        self.logger.debug(f"Recorded protocol message {message.msg_type.value} ({message.id})")
+    
     def add_thought(self, thought: str):
         """Record agent's thought process"""
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -86,6 +95,20 @@ class BaseAgent:
         """Reset agent state"""
         self.conversation_history = []
         self.thoughts = []
+
+    def export_memory(self) -> Dict[str, Any]:
+        """Export agent memory for persistence"""
+        return {
+            "conversation_history": list(self.conversation_history),
+            "thoughts": list(self.thoughts)
+        }
+
+    def load_memory(self, memory: Dict[str, Any]):
+        """Load agent memory from persisted state"""
+        if not memory:
+            return
+        self.conversation_history = memory.get("conversation_history", []) or []
+        self.thoughts = memory.get("thoughts", []) or []
 
 
 class PlanningAgent(BaseAgent):

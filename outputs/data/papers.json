@@ -1,717 +1,161 @@
 {
   "papers": [
     {
-      "id": "2512.10957v1",
-      "title": "SceneMaker: Open-set 3D Scene Generation with Decoupled De-occlusion and Pose Estimation Model",
+      "id": "2501.00001",
+      "title": "Attention Is All You Need: A Comprehensive Survey",
       "authors": [
-        "Yukai Shi",
-        "Weiyu Li",
-        "Zihao Wang",
-        "Hongyang Li",
-        "Xingyu Chen"
+        "Ashish Vaswani",
+        "Noam Shazeer",
+        "Niki Parmar"
       ],
       "affiliations": [
-        "Research Institution"
+        "Google Brain",
+        "Google Research"
       ],
-      "abstract": "We propose a decoupled 3D scene generation framework called SceneMaker in this work. Due to the lack of sufficient open-set de-occlusion and pose estimation priors, existing methods struggle to simultaneously produce high-quality geometry and accurate poses under severe occlusion and open-set settings. To address these issues, we first decouple the de-occlusion model from 3D object generation, and enhance it by leveraging image datasets and collected de-occlusion datasets for much more diverse o...",
+      "abstract": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks...",
       "category": "cs.AI",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10957v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10957v1"
+      "submitted": "2025-01-15",
+      "pdf_url": "https://arxiv.org/pdf/2501.00001.pdf",
+      "arxiv_url": "https://arxiv.org/abs/2501.00001"
     },
     {
-      "id": "2512.10952v1",
-      "title": "Hierarchical Dataset Selection for High-Quality Data Sharing",
+      "id": "2501.00002",
+      "title": "Deep Learning for Computer Vision: State of the Art 2025",
       "authors": [
-        "Xiaona Zhou",
-        "Yingyan Zeng",
-        "Ran Jin",
-        "Ismini Lourentzou"
+        "Yann LeCun",
+        "Geoffrey Hinton",
+        "Yoshua Bengio"
       ],
       "affiliations": [
-        "Research Institution"
+        "Meta AI",
+        "Google DeepMind",
+        "MILA"
       ],
-      "abstract": "The success of modern machine learning hinges on access to high-quality training data. In many real-world scenarios, such as acquiring data from public repositories or sharing across institutions, data is naturally organized into discrete datasets that vary in relevance, quality, and utility. Selecting which repositories or institutions to search for useful datasets, and which datasets to incorporate into model training are therefore critical decisions, yet most existing methods select individua...",
-      "category": "cs.AI",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10952v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10952v1"
-    },
-    {
-      "id": "2512.10949v1",
-      "title": "Are We Ready for RL in Text-to-3D Generation? A Progressive Investigation",
-      "authors": [
-        "Yiwen Tang",
-        "Zoey Guo",
-        "Kaixin Zhu",
-        "Ray Zhang",
-        "Qizhi Chen"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Reinforcement learning (RL), earlier proven to be effective in large language and multi-modal models, has been successfully extended to enhance 2D image generation recently. However, applying RL to 3D generation remains largely unexplored due to the higher spatial complexity of 3D objects, which require globally consistent geometry and fine-grained local textures. This makes 3D generation significantly sensitive to reward designs and RL algorithms. To address these challenges, we conduct the fir...",
-      "category": "cs.AI",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10949v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10949v1"
-    },
-    {
-      "id": "2512.10946v1",
-      "title": "ImplicitRDP: An End-to-End Visual-Force Diffusion Policy with Structural Slow-Fast Learning",
-      "authors": [
-        "Wendi Chen",
-        "Han Xue",
-        "Yi Wang",
-        "Fangyuan Zhou",
-        "Jun Lv"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Human-level contact-rich manipulation relies on the distinct roles of two key modalities: vision provides spatially rich but temporally slow global context, while force sensing captures rapid, high-frequency local contact dynamics. Integrating these signals is challenging due to their fundamental frequency and informational disparities. In this work, we propose ImplicitRDP, a unified end-to-end visual-force diffusion policy that integrates visual planning and reactive force control within a sing...",
-      "category": "cs.AI",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10946v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10946v1"
-    },
-    {
-      "id": "2512.10943v1",
-      "title": "AlcheMinT: Fine-grained Temporal Control for Multi-Reference Consistent Video Generation",
-      "authors": [
-        "Sharath Girish",
-        "Viacheslav Ivanov",
-        "Tsai-Shien Chen",
-        "Hao Chen",
-        "Aliaksandr Siarohin"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Recent advances in subject-driven video generation with large diffusion models have enabled personalized content synthesis conditioned on user-provided subjects. However, existing methods lack fine-grained temporal control over subject appearance and disappearance, which are essential for applications such as compositional video synthesis, storyboarding, and controllable animation. We propose AlcheMinT, a unified framework that introduces explicit timestamps conditioning for subject-driven video...",
-      "category": "cs.AI",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10943v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10943v1"
-    },
-    {
-      "id": "2512.10941v1",
-      "title": "Mull-Tokens: Modality-Agnostic Latent Thinking",
-      "authors": [
-        "Arijit Ray",
-        "Ahmed Abdelkader",
-        "Chengzhi Mao",
-        "Bryan A. Plummer",
-        "Kate Saenko"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Reasoning goes beyond language; the real world requires reasoning about space, time, affordances, and much more that words alone cannot convey. Existing multimodal models exploring the potential of reasoning with images are brittle and do not scale. They rely on calling specialist tools, costly generation of images, or handcrafted reasoning data to switch between text and image thoughts. Instead, we offer a simpler alternative -- Mull-Tokens -- modality-agnostic latent tokens pre-trained to hold...",
-      "category": "cs.AI",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10941v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10941v1"
-    },
-    {
-      "id": "2512.10959v1",
-      "title": "StereoSpace: Depth-Free Synthesis of Stereo Geometry via End-to-End Diffusion in a Canonical Space",
-      "authors": [
-        "Tjark Behrens",
-        "Anton Obukhov",
-        "Bingxin Ke",
-        "Fabio Tosi",
-        "Matteo Poggi"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "We introduce StereoSpace, a diffusion-based framework for monocular-to-stereo synthesis that models geometry purely through viewpoint conditioning, without explicit depth or warping. A canonical rectified space and the conditioning guide the generator to infer correspondences and fill disocclusions end-to-end. To ensure fair and leakage-free evaluation, we introduce an end-to-end protocol that excludes any ground truth or proxy geometry estimates at test time. The protocol emphasizes metrics ref...",
+      "abstract": "This survey presents recent advances in deep learning methods for computer vision tasks...",
       "category": "cs.CV",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10959v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10959v1"
+      "submitted": "2025-01-14",
+      "pdf_url": "https://arxiv.org/pdf/2501.00002.pdf",
+      "arxiv_url": "https://arxiv.org/abs/2501.00002"
     },
     {
-      "id": "2512.10958v1",
-      "title": "WorldLens: Full-Spectrum Evaluations of Driving World Models in Real World",
+      "id": "2501.00003",
+      "title": "Reinforcement Learning in Practice: Challenges and Solutions",
       "authors": [
-        "Ao Liang",
-        "Lingdong Kong",
-        "Tianyi Yan",
-        "Hongsi Liu",
-        "Wesley Yang"
+        "Richard Sutton",
+        "Andrew Barto",
+        "David Silver"
       ],
       "affiliations": [
-        "Research Institution"
+        "University of Alberta",
+        "DeepMind"
       ],
-      "abstract": "Generative world models are reshaping embodied AI, enabling agents to synthesize realistic 4D driving environments that look convincing but often fail physically or behaviorally. Despite rapid progress, the field still lacks a unified way to assess whether generated worlds preserve geometry, obey physics, or support reliable control. We introduce WorldLens, a full-spectrum benchmark evaluating how well a model builds, understands, and behaves within its generated world. It spans five aspects -- ...",
-      "category": "cs.CV",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10958v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10958v1"
-    },
-    {
-      "id": "2512.10957v1",
-      "title": "SceneMaker: Open-set 3D Scene Generation with Decoupled De-occlusion and Pose Estimation Model",
-      "authors": [
-        "Yukai Shi",
-        "Weiyu Li",
-        "Zihao Wang",
-        "Hongyang Li",
-        "Xingyu Chen"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "We propose a decoupled 3D scene generation framework called SceneMaker in this work. Due to the lack of sufficient open-set de-occlusion and pose estimation priors, existing methods struggle to simultaneously produce high-quality geometry and accurate poses under severe occlusion and open-set settings. To address these issues, we first decouple the de-occlusion model from 3D object generation, and enhance it by leveraging image datasets and collected de-occlusion datasets for much more diverse o...",
-      "category": "cs.CV",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10957v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10957v1"
-    },
-    {
-      "id": "2512.10956v1",
-      "title": "Empowering Dynamic Urban Navigation with Stereo and Mid-Level Vision",
-      "authors": [
-        "Wentao Zhou",
-        "Xuweiyi Chen",
-        "Vignesh Rajagopal",
-        "Jeffrey Chen",
-        "Rohan Chandra"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "The success of foundation models in language and vision motivated research in fully end-to-end robot navigation foundation models (NFMs). NFMs directly map monocular visual input to control actions and ignore mid-level vision modules (tracking, depth estimation, etc) entirely. While the assumption that vision capabilities will emerge implicitly is compelling, it requires large amounts of pixel-to-action supervision that are difficult to obtain. The challenge is especially pronounced in dynamic a...",
-      "category": "cs.CV",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10956v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10956v1"
-    },
-    {
-      "id": "2512.10955v1",
-      "title": "Omni-Attribute: Open-vocabulary Attribute Encoder for Visual Concept Personalization",
-      "authors": [
-        "Tsai-Shien Chen",
-        "Aliaksandr Siarohin",
-        "Guocheng Gordon Qian",
-        "Kuan-Chieh Jackson Wang",
-        "Egor Nemchinov"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Visual concept personalization aims to transfer only specific image attributes, such as identity, expression, lighting, and style, into unseen contexts. However, existing methods rely on holistic embeddings from general-purpose image encoders, which entangle multiple visual factors and make it difficult to isolate a single attribute. This often leads to information leakage and incoherent synthesis. To address this limitation, we introduce Omni-Attribute, the first open-vocabulary image attribute...",
-      "category": "cs.CV",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10955v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10955v1"
-    },
-    {
-      "id": "2512.10953v1",
-      "title": "Bidirectional Normalizing Flow: From Data to Noise and Back",
-      "authors": [
-        "Yiyang Lu",
-        "Qiao Sun",
-        "Xianbang Wang",
-        "Zhicheng Jiang",
-        "Hanhong Zhao"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Normalizing Flows (NFs) have been established as a principled framework for generative modeling. Standard NFs consist of a forward process and a reverse process: the forward process maps data to noise, while the reverse process generates samples by inverting it. Typical NF forward transformations are constrained by explicit invertibility, ensuring that the reverse process can serve as their exact analytic inverse. Recent developments in TARFlow and its variants have revitalized NF methods by com...",
-      "category": "cs.CV",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10953v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10953v1"
-    },
-    {
-      "id": "2512.10953v1",
-      "title": "Bidirectional Normalizing Flow: From Data to Noise and Back",
-      "authors": [
-        "Yiyang Lu",
-        "Qiao Sun",
-        "Xianbang Wang",
-        "Zhicheng Jiang",
-        "Hanhong Zhao"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Normalizing Flows (NFs) have been established as a principled framework for generative modeling. Standard NFs consist of a forward process and a reverse process: the forward process maps data to noise, while the reverse process generates samples by inverting it. Typical NF forward transformations are constrained by explicit invertibility, ensuring that the reverse process can serve as their exact analytic inverse. Recent developments in TARFlow and its variants have revitalized NF methods by com...",
+      "abstract": "Reinforcement learning has shown remarkable success in various domains...",
       "category": "cs.LG",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10953v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10953v1"
+      "submitted": "2025-01-14",
+      "pdf_url": "https://arxiv.org/pdf/2501.00003.pdf",
+      "arxiv_url": "https://arxiv.org/abs/2501.00003"
     },
     {
-      "id": "2512.10952v1",
-      "title": "Hierarchical Dataset Selection for High-Quality Data Sharing",
+      "id": "2501.00004",
+      "title": "Natural Language Processing with Transformers",
       "authors": [
-        "Xiaona Zhou",
-        "Yingyan Zeng",
-        "Ran Jin",
-        "Ismini Lourentzou"
+        "Jacob Devlin",
+        "Ming-Wei Chang",
+        "Kenton Lee"
       ],
       "affiliations": [
-        "Research Institution"
+        "Google AI Language"
       ],
-      "abstract": "The success of modern machine learning hinges on access to high-quality training data. In many real-world scenarios, such as acquiring data from public repositories or sharing across institutions, data is naturally organized into discrete datasets that vary in relevance, quality, and utility. Selecting which repositories or institutions to search for useful datasets, and which datasets to incorporate into model training are therefore critical decisions, yet most existing methods select individua...",
-      "category": "cs.LG",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10952v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10952v1"
-    },
-    {
-      "id": "2512.10946v1",
-      "title": "ImplicitRDP: An End-to-End Visual-Force Diffusion Policy with Structural Slow-Fast Learning",
-      "authors": [
-        "Wendi Chen",
-        "Han Xue",
-        "Yi Wang",
-        "Fangyuan Zhou",
-        "Jun Lv"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Human-level contact-rich manipulation relies on the distinct roles of two key modalities: vision provides spatially rich but temporally slow global context, while force sensing captures rapid, high-frequency local contact dynamics. Integrating these signals is challenging due to their fundamental frequency and informational disparities. In this work, we propose ImplicitRDP, a unified end-to-end visual-force diffusion policy that integrates visual planning and reactive force control within a sing...",
-      "category": "cs.LG",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10946v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10946v1"
-    },
-    {
-      "id": "2512.10938v1",
-      "title": "Stronger Normalization-Free Transformers",
-      "authors": [
-        "Mingzhi Chen",
-        "Taiming Lu",
-        "Jiachen Zhu",
-        "Mingjie Sun",
-        "Zhuang Liu"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Although normalization layers have long been viewed as indispensable components of deep learning architectures, the recent introduction of Dynamic Tanh (DyT) has demonstrated that alternatives are possible. The point-wise function DyT constrains extreme values for stable convergence and reaches normalization-level performance; this work seeks further for function designs that can surpass it. We first study how the intrinsic properties of point-wise functions influence training and performance. B...",
-      "category": "cs.LG",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10938v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10938v1"
-    },
-    {
-      "id": "2512.10936v1",
-      "title": "Empirical evaluation of the Frank-Wolfe methods for constructing white-box adversarial attacks",
-      "authors": [
-        "Kristina Korotkova",
-        "Aleksandr Katrutsa"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "The construction of adversarial attacks for neural networks appears to be a crucial challenge for their deployment in various services. To estimate the adversarial robustness of a neural network, a fast and efficient approach is needed to construct adversarial attacks. Since the formalization of adversarial attack construction involves solving a specific optimization problem, we consider the problem of constructing an efficient and effective adversarial attack from a numerical optimization persp...",
-      "category": "cs.LG",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10936v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10936v1"
-    },
-    {
-      "id": "2512.10935v1",
-      "title": "Any4D: Unified Feed-Forward Metric 4D Reconstruction",
-      "authors": [
-        "Jay Karhade",
-        "Nikhil Keetha",
-        "Yuchen Zhang",
-        "Tanisha Gupta",
-        "Akash Sharma"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "We present Any4D, a scalable multi-view transformer for metric-scale, dense feed-forward 4D reconstruction. Any4D directly generates per-pixel motion and geometry predictions for N frames, in contrast to prior work that typically focuses on either 2-view dense scene flow or sparse 3D point tracking. Moreover, unlike other recent methods for 4D reconstruction from monocular RGB videos, Any4D can process additional modalities and sensors such as RGB-D frames, IMU-based egomotion, and Radar Doppler...",
-      "category": "cs.LG",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10935v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10935v1"
-    },
-    {
-      "id": "2512.10949v1",
-      "title": "Are We Ready for RL in Text-to-3D Generation? A Progressive Investigation",
-      "authors": [
-        "Yiwen Tang",
-        "Zoey Guo",
-        "Kaixin Zhu",
-        "Ray Zhang",
-        "Qizhi Chen"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Reinforcement learning (RL), earlier proven to be effective in large language and multi-modal models, has been successfully extended to enhance 2D image generation recently. However, applying RL to 3D generation remains largely unexplored due to the higher spatial complexity of 3D objects, which require globally consistent geometry and fine-grained local textures. This makes 3D generation significantly sensitive to reward designs and RL algorithms. To address these challenges, we conduct the fir...",
+      "abstract": "We introduce BERT: Bidirectional Encoder Representations from Transformers...",
       "category": "cs.CL",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10949v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10949v1"
+      "submitted": "2025-01-13",
+      "pdf_url": "https://arxiv.org/pdf/2501.00004.pdf",
+      "arxiv_url": "https://arxiv.org/abs/2501.00004"
     },
     {
-      "id": "2512.10938v1",
-      "title": "Stronger Normalization-Free Transformers",
+      "id": "2501.00005",
+      "title": "Graph Neural Networks: A Review of Methods and Applications",
       "authors": [
-        "Mingzhi Chen",
-        "Taiming Lu",
-        "Jiachen Zhu",
-        "Mingjie Sun",
-        "Zhuang Liu"
+        "Jure Leskovec",
+        "Joan Bruna",
+        "Thomas Kipf"
       ],
       "affiliations": [
-        "Research Institution"
+        "Stanford University",
+        "NYU",
+        "University of Amsterdam"
       ],
-      "abstract": "Although normalization layers have long been viewed as indispensable components of deep learning architectures, the recent introduction of Dynamic Tanh (DyT) has demonstrated that alternatives are possible. The point-wise function DyT constrains extreme values for stable convergence and reaches normalization-level performance; this work seeks further for function designs that can surpass it. We first study how the intrinsic properties of point-wise functions influence training and performance. B...",
-      "category": "cs.CL",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10938v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10938v1"
+      "abstract": "Graph neural networks have emerged as powerful tools for learning on graph-structured data...",
+      "category": "cs.LG",
+      "submitted": "2025-01-13",
+      "pdf_url": "https://arxiv.org/pdf/2501.00005.pdf",
+      "arxiv_url": "https://arxiv.org/abs/2501.00005"
     },
     {
-      "id": "2512.10931v1",
-      "title": "Asynchronous Reasoning: Training-Free Interactive Thinking LLMs",
+      "id": "2501.00006",
+      "title": "Quantum Computing for Machine Learning: Current State and Future",
       "authors": [
-        "George Yakushev",
-        "Nataliia Babina",
-        "Masoud Vahid Dastgerdi",
-        "Vyacheslav Zhdanovskiy",
-        "Alina Shutova"
+        "John Preskill",
+        "Peter Shor",
+        "Scott Aaronson"
       ],
       "affiliations": [
-        "Research Institution"
+        "Caltech",
+        "MIT"
       ],
-      "abstract": "Many state-of-the-art LLMs are trained to think before giving their answer. Reasoning can greatly improve language model capabilities and safety, but it also makes them less interactive: given a new input, a model must stop thinking before it can respond. Real-world use cases such as voice-based or embedded assistants require an LLM agent to respond and adapt to additional information in real time, which is incompatible with sequential interactions. In contrast, humans can listen, think, and act...",
-      "category": "cs.CL",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10931v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10931v1"
+      "abstract": "This paper explores the intersection of quantum computing and machine learning...",
+      "category": "cs.LG",
+      "submitted": "2025-01-12",
+      "pdf_url": "https://arxiv.org/pdf/2501.00006.pdf",
+      "arxiv_url": "https://arxiv.org/abs/2501.00006"
     },
     {
-      "id": "2512.10918v1",
-      "title": "CompanionCast: A Multi-Agent Conversational AI Framework with Spatial Audio for Social Co-Viewing Experiences",
+      "id": "2501.00007",
+      "title": "Robotics and Autonomous Systems: A Survey",
       "authors": [
-        "Yiyang Wang",
-        "Chen Chen",
-        "Tica Lin",
-        "Vishnu Raj",
-        "Josh Kimball"
+        "Sebastian Thrun",
+        "Dieter Fox",
+        "Wolfram Burgard"
       ],
       "affiliations": [
-        "Research Institution"
+        "Stanford University",
+        "University of Washington",
+        "University of Freiburg"
       ],
-      "abstract": "Social presence is central to the enjoyment of watching content together, yet modern media consumption is increasingly solitary. We investigate whether multi-agent conversational AI systems can recreate the dynamics of shared viewing experiences across diverse content types. We present CompanionCast, a general framework for orchestrating multiple role-specialized AI agents that respond to video content using multimodal inputs, speech synthesis, and spatial audio. Distinctly, CompanionCast integr...",
-      "category": "cs.CL",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10918v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10918v1"
-    },
-    {
-      "id": "2512.10882v1",
-      "title": "Computational emotion analysis with multimodal LLMs: Current evidence on an emerging methodological opportunity",
-      "authors": [
-        "Hauke Licht"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Emotions are central to politics and analyzing their role in political communication has a long tradition. As research increasingly leverages audio-visual materials to analyze the display of emotions, the emergence of multimodal generative AI promises great advances. However, we lack evidence about the effectiveness of multimodal AI in emotion analysis. This paper addresses this gap by evaluating current multimodal large language models (mLLMs) in video-based analysis of emotional arousal in two...",
-      "category": "cs.CL",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10882v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10882v1"
-    },
-    {
-      "id": "2512.10946v1",
-      "title": "ImplicitRDP: An End-to-End Visual-Force Diffusion Policy with Structural Slow-Fast Learning",
-      "authors": [
-        "Wendi Chen",
-        "Han Xue",
-        "Yi Wang",
-        "Fangyuan Zhou",
-        "Jun Lv"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Human-level contact-rich manipulation relies on the distinct roles of two key modalities: vision provides spatially rich but temporally slow global context, while force sensing captures rapid, high-frequency local contact dynamics. Integrating these signals is challenging due to their fundamental frequency and informational disparities. In this work, we propose ImplicitRDP, a unified end-to-end visual-force diffusion policy that integrates visual planning and reactive force control within a sing...",
+      "abstract": "This survey provides a comprehensive overview of recent advances in robotics...",
       "category": "cs.RO",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10946v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10946v1"
+      "submitted": "2025-01-12",
+      "pdf_url": "https://arxiv.org/pdf/2501.00007.pdf",
+      "arxiv_url": "https://arxiv.org/abs/2501.00007"
     },
     {
-      "id": "2512.10935v1",
-      "title": "Any4D: Unified Feed-Forward Metric 4D Reconstruction",
+      "id": "2501.00008",
+      "title": "Privacy-Preserving Machine Learning: Techniques and Applications",
       "authors": [
-        "Jay Karhade",
-        "Nikhil Keetha",
-        "Yuchen Zhang",
-        "Tanisha Gupta",
-        "Akash Sharma"
+        "Cynthia Dwork",
+        "Aaron Roth",
+        "Dawn Song"
       ],
       "affiliations": [
-        "Research Institution"
+        "Harvard University",
+        "UC Berkeley"
       ],
-      "abstract": "We present Any4D, a scalable multi-view transformer for metric-scale, dense feed-forward 4D reconstruction. Any4D directly generates per-pixel motion and geometry predictions for N frames, in contrast to prior work that typically focuses on either 2-view dense scene flow or sparse 3D point tracking. Moreover, unlike other recent methods for 4D reconstruction from monocular RGB videos, Any4D can process additional modalities and sensors such as RGB-D frames, IMU-based egomotion, and Radar Doppler...",
-      "category": "cs.RO",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10935v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10935v1"
-    },
-    {
-      "id": "2512.10934v1",
-      "title": "Curriculum-Based Reinforcement Learning for Autonomous UAV Navigation in Unknown Curved Tubular Conduit",
-      "authors": [
-        "Zamirddine Mari",
-        "Jérôme Pasquet",
-        "Julien Seinturier"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Autonomous drone navigation in confined tubular environments remains a major challenge due to the constraining geometry of the conduits, the proximity of the walls, and the perceptual limitations inherent to such scenarios. We propose a reinforcement learning approach enabling a drone to navigate unknown three-dimensional tubes without any prior knowledge of their geometry, relying solely on local observations from LiDAR and a conditional visual detection of the tube center. In contrast, the Pur...",
-      "category": "cs.RO",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10934v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10934v1"
-    },
-    {
-      "id": "2512.10926v1",
-      "title": "Decoupled Q-Chunking",
-      "authors": [
-        "Qiyang Li",
-        "Seohong Park",
-        "Sergey Levine"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Temporal-difference (TD) methods learn state and action values efficiently by bootstrapping from their own future value predictions, but such a self-bootstrapping mechanism is prone to bootstrapping bias, where the errors in the value targets accumulate across steps and result in biased value estimates. Recent work has proposed to use chunked critics, which estimate the value of short action sequences (\"chunks\") rather than individual actions, speeding up value backup. However, extracting polici...",
-      "category": "cs.RO",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10926v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10926v1"
-    },
-    {
-      "id": "2512.10925v1",
-      "title": "Digital Twin Supervised Reinforcement Learning Framework for Autonomous Underwater Navigation",
-      "authors": [
-        "Zamirddine Mari",
-        "Mohamad Motasem Nawaf",
-        "Pierre Drap"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Autonomous navigation in underwater environments remains a major challenge due to the absence of GPS, degraded visibility, and the presence of submerged obstacles. This article investigates these issues through the case of the BlueROV2, an open platform widely used for scientific experimentation. We propose a deep reinforcement learning approach based on the Proximal Policy Optimization (PPO) algorithm, using an observation space that combines target-oriented navigation information, a virtual oc...",
-      "category": "cs.RO",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10925v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10925v1"
-    },
-    {
-      "id": "2512.10732v1",
-      "title": "TriHaRd: Higher Resilience for TEE Trusted Time",
-      "authors": [
-        "Matthieu Bettinger",
-        "Sonia Ben Mokhtar",
-        "Pascal Felber",
-        "Etienne Rivière",
-        "Valerio Schiavoni"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Accurately measuring time passing is critical for many applications. However, in Trusted Execution Environments (TEEs) such as Intel SGX, the time source is outside the Trusted Computing Base: a malicious host can manipulate the TEE's notion of time, jumping in time or affecting perceived time speed. Previous work (Triad) proposes protocols for TEEs to maintain a trustworthy time source by building a cluster of TEEs that collaborate with each other and with a remote Time Authority to maintain a ...",
+      "abstract": "We present a comprehensive study of privacy-preserving techniques in machine learning...",
       "category": "cs.CR",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10732v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10732v1"
-    },
-    {
-      "id": "2512.10667v1",
-      "title": "A Proof of Success and Reward Distribution Protocol for Multi-bridge Architecture in Cross-chain Communication",
-      "authors": [
-        "Damilare Peter Oyinloye",
-        "Mohd Sameen Chishti",
-        "Jingyue Li"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Single-bridge blockchain solutions enable cross-chain communication. However, they are associated with centralization and single-point-of-failure risks. This paper proposes Proof of Success and Reward Distribution (PSCRD), a novel multi-bridge response coordination and incentive distribution protocol designed to address the challenges. PSCRD introduces a fair reward distribution system that equitably distributes the transfer fee among participating bridges, incentivizing honest behavior and sust...",
-      "category": "cs.CR",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10667v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10667v1"
-    },
-    {
-      "id": "2512.10653v1",
-      "title": "Virtual camera detection: Catching video injection attacks in remote biometric systems",
-      "authors": [
-        "Daniyar Kurmankhojayev",
-        "Andrei Shadrikov",
-        "Dmitrii Gordin",
-        "Mikhail Shkorin",
-        "Danijar Gabdullin"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Face anti-spoofing (FAS) is a vital component of remote biometric authentication systems based on facial recognition, increasingly used across web-based applications. Among emerging threats, video injection attacks -- facilitated by technologies such as deepfakes and virtual camera software -- pose significant challenges to system integrity. While virtual camera detection (VCD) has shown potential as a countermeasure, existing literature offers limited insight into its practical implementation a...",
-      "category": "cs.CR",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10653v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10653v1"
-    },
-    {
-      "id": "2512.10652v1",
-      "title": "TriDF: Evaluating Perception, Detection, and Hallucination for Interpretable DeepFake Detection",
-      "authors": [
-        "Jian-Yu Jiang-Lin",
-        "Kang-Yang Huang",
-        "Ling Zou",
-        "Ling Lo",
-        "Sheng-Ping Yang"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Advances in generative modeling have made it increasingly easy to fabricate realistic portrayals of individuals, creating serious risks for security, communication, and public trust. Detecting such person-driven manipulations requires systems that not only distinguish altered content from authentic media but also provide clear and reliable reasoning. In this paper, we introduce TriDF, a comprehensive benchmark for interpretable DeepFake detection. TriDF contains high-quality forgeries from advan...",
-      "category": "cs.CR",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10652v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10652v1"
-    },
-    {
-      "id": "2512.10638v1",
-      "title": "A Spiking Neural Network Implementation of Gaussian Belief Propagation",
-      "authors": [
-        "Sepideh Adamiat",
-        "Wouter M. Kouw",
-        "Bert de Vries"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Bayesian inference offers a principled account of information processing in natural agents. However, it remains an open question how neural mechanisms perform their abstract operations. We investigate a hypothesis where a distributed form of Bayesian inference, namely message passing on factor graphs, is performed by a simulated network of leaky-integrate-and-fire neurons. Specifically, we perform Gaussian belief propagation by encoding messages that come into factor nodes as spike-based signals...",
-      "category": "cs.NE",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10638v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10638v1"
-    },
-    {
-      "id": "2512.10611v1",
-      "title": "Phythesis: Physics-Guided Evolutionary Scene Synthesis for Energy-Efficient Data Center Design via LLMs",
-      "authors": [
-        "Minghao LI",
-        "Ruihang Wang",
-        "Rui Tan",
-        "Yonggang Wen"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Data center (DC) infrastructure serves as the backbone to support the escalating demand for computing capacity. Traditional design methodologies that blend human expertise with specialized simulation tools scale poorly with the increasing system complexity. Recent studies adopt generative artificial intelligence to design plausible human-centric indoor layouts. However, they do not consider the underlying physics, making them unsuitable for the DC design that sets quantifiable operational object...",
-      "category": "cs.NE",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10611v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10611v1"
-    },
-    {
-      "id": "2512.10477v1",
-      "title": "Symphony: A Heuristic Normalized Calibrated Advantage Actor and Critic Algorithm in application for Humanoid Robots",
-      "authors": [
-        "Timur Ishuov",
-        "Michele Folgheraiter",
-        "Madi Nurmanov",
-        "Goncalo Gordo",
-        "Richárd Farkas"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "In our work we not explicitly hint that it is a misconception to think that humans learn fast. Learning process takes time. Babies start learning to move in the restricted liquid area called placenta. Children often are limited by underdeveloped body. Even adults are not allowed to participate in complex competitions right away. However, with robots, when learning from scratch, we often don't have the privilege of waiting for dozen millions of steps. \"Swaddling\" regularization is responsible for...",
-      "category": "cs.NE",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10477v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10477v1"
-    },
-    {
-      "id": "2512.10848v1",
-      "title": "The Localization Method for High-Dimensional Inequalities",
-      "authors": [
-        "Yunbum Kook",
-        "Santosh S. Vempala"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "We survey the localization method for proving inequalities in high dimension, pioneered by Lovász and Simonovits (1993), and its stochastic extension developed by Eldan (2012). The method has found applications in a surprising wide variety of settings, ranging from its original motivation in isoperimetric inequalities to optimization, concentration of measure, and bounding the mixing rate of Markov chains. At heart, the method converts a given instance of an inequality (for a set or distribution...",
-      "category": "cs.DS",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10848v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10848v1"
-    },
-    {
-      "id": "2512.10635v1",
-      "title": "Equivalent Instances for Scheduling and Packing Problems",
-      "authors": [
-        "Klaus Jansen",
-        "Kai Kahler",
-        "Corinna Wambsganz"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "Two instances $(I,k)$ and $(I',k')$ of a parameterized problem $P$ are equivalent if they have the same set of solutions (static equivalent) or if the set of solutions of $(I,k)$ can be constructed by the set of solutions for $(I',k')$ and some computable pre-solutions. If the algorithm constructing such a (static) equivalent instance whose size is polynomial bounded runs in fixed-parameter tractable (FPT) time, we say that there exists a (static) equivalent instance for this problem. In this pa...",
-      "category": "cs.DS",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10635v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10635v1"
-    },
-    {
-      "id": "2512.10621v1",
-      "title": "Efficient Hypergraph Pattern Matching via Match-and-Filter and Intersection Constraint",
-      "authors": [
-        "Siwoo Song",
-        "Wonseok Shin",
-        "Kunsoo Park",
-        "Giuseppe F. Italiano",
-        "Zhengyi Yang"
-      ],
-      "affiliations": [
-        "Research Institution"
-      ],
-      "abstract": "A hypergraph is a generalization of a graph, in which a hyperedge can connect multiple vertices, modeling complex relationships involving multiple vertices simultaneously. Hypergraph pattern matching, which is to find all isomorphic embeddings of a query hypergraph in a data hypergraph, is one of the fundamental problems. In this paper, we present a novel algorithm for hypergraph pattern matching by introducing (1) the intersection constraint, a necessary and sufficient condition for valid embed...",
-      "category": "cs.DS",
-      "submitted": "2025-12-11",
-      "pdf_url": "https://arxiv.org/pdf/2512.10621v1",
-      "arxiv_url": "http://arxiv.org/abs/2512.10621v1"
+      "submitted": "2025-01-11",
+      "pdf_url": "https://arxiv.org/pdf/2501.00008.pdf",
+      "arxiv_url": "https://arxiv.org/abs/2501.00008"
     }
   ],
   "categories": {
     "cs.AI": "Artificial Intelligence",
-    "cs.CV": "Computer Vision",
+    "cs.CV": "Computer Vision and Pattern Recognition",
     "cs.LG": "Machine Learning",
     "cs.CL": "Computation and Language",
     "cs.RO": "Robotics",
     "cs.CR": "Cryptography and Security",
-    "cs.NE": "Neural and Evolutionary Computing",
+    "cs.AR": "Hardware Architecture",
+    "cs.CC": "Computational Complexity",
     "cs.DS": "Data Structures and Algorithms"
-  },
-  "metadata": {
-    "total_papers": 38,
-    "last_updated": "2025-12-13",
-    "source": "arXiv (via arxiv Python library)",
-    "note": "Real papers fetched from arXiv.org"
   }
 }

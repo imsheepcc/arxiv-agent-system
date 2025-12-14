@@ -152,6 +152,51 @@ User Requirement
 Complete Project
 ```
 
+### Agent Communication Protocol
+
+Agents和调度器之间的消息统一遵循 `protocol/message_schema.py` 中定义的 `AgentMessage`：
+
+| 字段        | 含义                                      |
+|-------------|-------------------------------------------|
+| `id`        | 全局唯一消息ID (UUID)                      |
+| `msg_type`  | 消息类型，取自 `MessageType` 枚举          |
+| `sender`    | 发送方角色（如 Orchestrator、PlanningAgent） |
+| `receiver`  | 接收方角色                                  |
+| `payload`   | 与该消息相关的业务数据 (任务、结果等)      |
+| `timestamp` | ISO8601 UTC 时间戳                         |
+
+当前支持的 `msg_type`：
+
+- `plan_request` / `plan_response`
+- `task_assignment` / `task_result`
+- `evaluation_request` / `evaluation_report`
+
+Orchestrator 在各阶段都会封装协议消息并记录到对应 Agent 的 `conversation_history`，例如任务派发：
+
+```json
+{
+  "id": "4d9ceff0-77be-4b10-8046-2f5d7fa7c7c0",
+  "msg_type": "task_assignment",
+  "sender": "Orchestrator",
+  "receiver": "CodeGenerationAgent",
+  "payload": {
+    "task": {
+      "id": 3,
+      "title": "Create paper detail page",
+      "description": "...",
+      "file_path": "paper.html"
+    },
+    "context": {
+      "completed_tasks": [1, 2],
+      "completed_files": ["data/papers.json", "index.html"]
+    }
+  },
+  "timestamp": "2025-01-15T10:02:30.123Z"
+}
+```
+
+Evaluation 阶段同样会生成 `evaluation_request` 和 `evaluation_report`，这样日志与追踪都能基于统一协议格式完成。
+
 ### Key Features
 
 #### 1. Function Calling
@@ -164,11 +209,43 @@ Agents use LLM function calling to:
 - **Project Plan**: Accessible to all agents
 - **Completed Files**: Track progress across tasks
 - **Conversation History**: Maintain context per agent
+- **State Manager**: Persisted JSON (`outputs/state/state.json`) keeps project status & agent memories
 
 #### 3. Task Dependency Management
 - Automatic dependency resolution
 - Priority-based task scheduling
 - Iterative refinement capability
+
+### State & Memory Management
+
+系统通过 `state/state_manager.py` 将运行状态持久化至 `outputs/state/state.json`：
+
+- `project_plan` / `completed_tasks` / `created_files` / `task_results` / `evaluation`
+- `agents`: 保存每个 Agent 的 `conversation_history` 与 `thoughts`
+- `last_updated`: ISO8601 时间戳
+
+运行过程中 Orchestrator 会：
+
+1. 加载已有 state，恢复各 Agent 的记忆
+2. 每次任务/评估完成后 `state_manager.update(...)`
+3. 调用 `state_manager.record_agent_memory(agent)` 写回记忆
+4. 提供 `get_recent_tasks()/get_recent_files()` 供 Agent 在 `context` 中引用，实现“记忆复用”
+
+示例片段：
+
+```json
+{
+  "project_plan": {"project_name": "arXiv CS Daily", "...": "..."},
+  "completed_tasks": [1, 2, 3],
+  "agents": {
+    "CodeGenerationAgent": {
+      "conversation_history": [...],
+      "thoughts": ["[2025-01-15 10:01:00] Starting task ..."]
+    }
+  },
+  "last_updated": "2025-01-15T10:05:30.456Z"
+}
+```
 
 ## 📊 Logging and Debugging
 
