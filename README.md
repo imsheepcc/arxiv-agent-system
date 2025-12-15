@@ -1,8 +1,8 @@
 # Multi-Agent Collaborative System for Automated Code Generation
 
-**Course**: COMP7103C - Multi-Agent Systems  
-**Project**: Automated Software Development with Collaborative AI Agents  
-**Student**: Kasper
+**Course**: COMP7103C - Assignment
+**Project**: Code Agent Building
+**Student**: YANG Chen, ZENG Hua
 
 ## Overview
 
