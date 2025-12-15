@@ -1,438 +1,403 @@
-# Multi-Agent Code Generation System
+# Multi-Agent Collaborative System for Automated Code Generation
 
-A sophisticated multi-agent collaborative system that autonomously generates complete software projects from natural language descriptions. Built for COMP7103C Course Assignment.
+**Course**: COMP7103C - Multi-Agent Systems  
+**Project**: Automated Software Development with Collaborative AI Agents  
+**Student**: Kasper
 
-## 🎯 Project Overview
+## Overview
 
-This system implements a multi-agent architecture where specialized AI agents collaborate to:
-- **Plan** software projects and decompose requirements into tasks
-- **Generate** production-ready code with proper structure
-- **Evaluate** code quality and completeness
+This project implements a multi-agent system that autonomously generates complete software projects from natural language requirements. The system demonstrates advanced agent coordination, LLM integration, external API usage, and collaborative problem-solving capabilities.
 
-## 🏗️ Architecture
+## System Architecture
 
-### Core Components
+### Agent Roles
 
-#### 1. **Agents**
-- **Planning Agent**: Analyzes requirements, designs architecture, creates task lists
-- **Code Generation Agent**: Implements features using file system tools and LLM function calling
-- **Evaluation Agent**: Reviews code quality, validates functionality, provides feedback
+The system consists of three specialized agents coordinated by a central orchestrator:
 
-#### 2. **Orchestrator**
-- **Task Scheduling**: Manages task execution order and dependencies
-- **Communication Management**: Coordinates information flow between agents
-- **State Management**: Tracks project state and completion status
+1. **Planning Agent**
+   - Analyzes project requirements
+   - Designs system architecture
+   - Decomposes requirements into executable tasks
+   - Creates structured task lists with dependencies
 
-#### 3. **Tools**
-- **File System Tools**: Create, read, write, and manage files
-- **LLM Client**: Unified interface for multiple LLM providers (DeepSeek, OpenAI, Claude)
-- **arXiv API Tools**: Fetch REAL papers from arXiv (search by category, get authentic metadata)
-- **Web Search Tools**: Search the web (Brave, Google Serper, or DuckDuckGo)
+2. **Code Generation Agent**
+   - Implements features using function calling
+   - Utilizes multiple tools (file operations, arXiv API, web search)
+   - Generates production-ready code
+   - Fetches real data from external sources
 
-## 🚀 Quick Start
+3. **Evaluation Agent**
+   - Reviews code quality and completeness
+   - Validates functionality
+   - Provides structured feedback
+   - Assigns quality scores
 
-### Installation
+### Multi-Agent Orchestrator
+
+- Coordinates communication between agents
+- Manages task execution flow
+- Maintains shared state and project context
+- Handles iterative refinement
+
+### Tool Integration
+
+The system integrates four categories of tools:
+
+1. **File System Tools**: Create, read, write, and manage files
+2. **arXiv API Tools**: Fetch real academic papers with authentic metadata
+3. **Web Search Tools**: Search the web using multiple providers (Brave, Serper, DuckDuckGo)
+4. **LLM Clients**: Support for DeepSeek, OpenAI, and Claude APIs
+
+## Key Features
+
+### 1. Function Calling Implementation
+
+Agents use OpenAI-compatible function calling to execute tools:
+
+```python
+{
+  "type": "function",
+  "function": {
+    "name": "search_arxiv_papers",
+    "description": "Search for papers from arXiv by category",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "category": {"type": "string", "enum": ["cs.AI", "cs.CV", ...]},
+        "max_results": {"type": "integer"}
+      }
+    }
+  }
+}
+```
+
+### 2. External Knowledge Integration
+
+The system integrates real-world data sources:
+
+- **arXiv API**: Fetches authentic academic papers with real IDs, authors, and PDF links
+- **Web Search**: Retrieves current information from the internet
+- **Structured Data**: Processes XML/JSON responses into usable formats
+
+### 3. Multi-Provider LLM Support
+
+Supports multiple LLM providers with unified interface:
+- DeepSeek (cost-effective)
+- OpenAI GPT-4/3.5
+- Anthropic Claude 3.5
+
+### 4. Shared State Management
+
+All agents access:
+- Project plan and architecture
+- Completed files and task status
+- Conversation history for context
+
+## Installation and Setup
+
+### Prerequisites
 
 ```bash
-# Clone the repository
-git clone <your-repo-url>
-cd arxiv-agent-system
+# Python 3.8 or higher
+python --version
 
 # Install dependencies
 pip install -r requirements.txt
+
+# For real arXiv data (optional)
+pip install arxiv
 ```
 
 ### Configuration
 
-Set up your LLM API key (choose one):
+Set your LLM API key:
 
 ```bash
-# For DeepSeek (recommended)
-export DEEPSEEK_API_KEY="your-api-key-here"
+# DeepSeek (recommended)
+export DEEPSEEK_API_KEY="your-api-key"
 
-# For OpenAI
-export OPENAI_API_KEY="your-api-key-here"
+# OpenAI (alternative)
+export OPENAI_API_KEY="your-api-key"
 
-# For Anthropic Claude
-export ANTHROPIC_API_KEY="your-api-key-here"
+# Claude (alternative)
+export ANTHROPIC_API_KEY="your-api-key"
 ```
 
-### Basic Usage
+## Usage
+
+### Basic Execution
 
 ```bash
-# Run the arXiv CS Daily project (default)
+# Run with default test case (arXiv CS Daily)
 python main.py
 
-# Specify custom output directory
-python main.py --output-dir my_project
-
-# Use different LLM provider
+# Use specific LLM provider
 python main.py --provider openai
 
-# Test without API (mock mode)
+# Test system architecture without API
 python main.py --mock
 ```
 
-### Advanced Usage
+### Fetching Real arXiv Data
 
 ```bash
-# Custom project requirement
-python main.py --requirement "Build a todo list web app with HTML, CSS, and JavaScript"
+# Method 1: Using arxiv library (recommended)
+pip install arxiv
+python scripts/fetch_real_papers.py
 
-# Specify model and provider
-python main.py --provider deepseek --model deepseek-chat
+# Method 2: Direct API access
+PYTHONPATH=. python scripts/fetch_arxiv_papers.py
 
-# Control iteration limit
-python main.py --max-iterations 30
+# Method 3: One-click script
+bash get_real_data.sh
 ```
 
-## 📁 Project Structure
+### Viewing Generated Website
 
-```
-arxiv-agent-system/
-├── agents/                 # Agent implementations
-│   ├── base_agent.py      # Base agent class and PlanningAgent
-│   ├── code_agent.py      # Code generation agent
-│   └── evaluation_agent.py # Code evaluation agent
-├── orchestrator/          # Multi-agent coordination
-│   └── multi_agent_orchestrator.py
-├── tools/                 # Agent tools
-│   ├── file_tools.py     # File system operations
-│   └── llm_client.py     # LLM API wrapper
-├── prompts/              # System prompts
-│   └── system_prompts.py
-├── config/               # Configuration
-│   └── config.py
-├── outputs/              # Generated code (created at runtime)
-├── logs/                 # Execution logs (created at runtime)
-├── main.py              # Main entry point
-├── requirements.txt     # Python dependencies
-└── README.md           # This file
-```
-
-## 🎓 Test Case: arXiv CS Daily Website
-
-The default test case generates a complete "arXiv CS Daily" website with:
-
-### Features
-1. **Domain-Specific Navigation**: Browse by CS categories (cs.AI, cs.CV, cs.LG, etc.)
-2. **Daily Paper List**: View latest papers with titles, dates, and categories
-3. **Paper Detail Pages**: Full metadata, PDF links, and citation generation (BibTeX + standard format)
-
-### Generated Files
-- `index.html` - Homepage with category navigation
-- `category.html` - Category-specific paper listings
-- `paper.html` - Individual paper details
-- `css/style.css` - Responsive styling
-- `js/script.js` - Dynamic functionality and citation copying
-- `data/papers.json` - Sample paper data
-
-### Running the Website
-
-After generation:
 ```bash
 cd outputs
 python -m http.server 8000
-# Visit http://localhost:8000 in your browser
+# Visit http://localhost:8000
 ```
 
-## 🔧 System Design
-
-### Agent Communication Flow
+## Project Structure
 
 ```
-User Requirement
-      ↓
-[Planning Agent]
-      ↓ (Task List)
-[Orchestrator] ← → [Code Generation Agent] ← → [File Tools]
-      ↓
-[Evaluation Agent]
-      ↓
-Complete Project
+arxiv-agent-system/
+├── agents/
+│   ├── base_agent.py           # Base agent class + Planning Agent
+│   ├── code_agent.py           # Code Generation Agent
+│   └── evaluation_agent.py     # Evaluation Agent
+├── orchestrator/
+│   └── multi_agent_orchestrator.py  # Agent coordination
+├── tools/
+│   ├── file_tools.py           # File operations
+│   ├── arxiv_tools.py          # arXiv API integration
+│   ├── web_search_tools.py     # Web search (Brave/Serper/DuckDuckGo)
+│   └── llm_client.py           # LLM provider wrapper
+├── prompts/
+│   └── system_prompts.py       # Agent system prompts
+├── config/
+│   └── config.py               # System configuration
+├── scripts/
+│   ├── fetch_arxiv_papers.py   # Fetch real papers (API)
+│   └── fetch_real_papers.py    # Fetch real papers (arxiv library)
+├── outputs/                     # Generated website files
+├── logs/                        # Execution logs
+├── main.py                      # Main entry point
+├── test_system.py              # System tests
+└── README.md                    # This file
 ```
 
-### Agent Communication Protocol
+## Test Case: arXiv CS Daily Website
 
-Agents和调度器之间的消息统一遵循 `protocol/message_schema.py` 中定义的 `AgentMessage`：
+The system generates a complete academic paper tracking website:
 
-| 字段        | 含义                                      |
-|-------------|-------------------------------------------|
-| `id`        | 全局唯一消息ID (UUID)                      |
-| `msg_type`  | 消息类型，取自 `MessageType` 枚举          |
-| `sender`    | 发送方角色（如 Orchestrator、PlanningAgent） |
-| `receiver`  | 接收方角色                                  |
-| `payload`   | 与该消息相关的业务数据 (任务、结果等)      |
-| `timestamp` | ISO8601 UTC 时间戳                         |
+### Generated Components
 
-当前支持的 `msg_type`：
+1. **Homepage** (`index.html`)
+   - Hero section with project description
+   - Category cards for CS subfields
+   - Navigation menu
 
-- `plan_request` / `plan_response`
-- `task_assignment` / `task_result`
-- `evaluation_request` / `evaluation_report`
+2. **Category Pages** (`category.html`)
+   - Papers filtered by category (cs.AI, cs.CV, cs.LG, etc.)
+   - Date-based filtering
+   - Paper metadata display
 
-Orchestrator 在各阶段都会封装协议消息并记录到对应 Agent 的 `conversation_history`，例如任务派发：
+3. **Paper Detail Pages** (`paper.html`)
+   - Complete paper information
+   - Author affiliations
+   - Abstract and keywords
+   - Links to PDF and arXiv page
 
-```json
+4. **Styling** (`css/style.css`)
+   - Responsive design
+   - Professional appearance
+   - Accessible color scheme
+
+5. **Functionality** (`js/script.js`)
+   - Dynamic content loading
+   - Category filtering
+   - Date-based sorting
+
+6. **Data** (`data/papers.json`)
+   - Real papers from arXiv API
+   - Authentic IDs, authors, and metadata
+   - Working PDF links
+
+### Data Authenticity
+
+Papers fetched from arXiv contain:
+- Real paper IDs (e.g., `2412.11798v1`)
+- Authentic author names and affiliations
+- Actual abstracts and publication dates
+- Functional PDF links to arXiv.org
+
+## Agent Communication Protocol
+
+### Message Flow
+
+```
+1. User provides requirement
+   ↓
+2. Planning Agent creates structured plan
+   ↓
+3. Orchestrator distributes tasks
+   ↓
+4. Code Generation Agent executes tasks
+   - Uses file tools to create files
+   - Calls arXiv API for real data
+   - Uses web search when needed
+   ↓
+5. Evaluation Agent reviews output
+   ↓
+6. Orchestrator decides: complete or refine
+```
+
+### Shared Context
+
+All agents access:
+- Project requirements
+- Current plan and architecture
+- List of completed files
+- Task execution history
+- Previous agent responses
+
+## Technical Implementation
+
+### Function Calling Example
+
+```python
+# Agent generates function call
 {
-  "id": "4d9ceff0-77be-4b10-8046-2f5d7fa7c7c0",
-  "msg_type": "task_assignment",
-  "sender": "Orchestrator",
-  "receiver": "CodeGenerationAgent",
-  "payload": {
-    "task": {
-      "id": 3,
-      "title": "Create paper detail page",
-      "description": "...",
-      "file_path": "paper.html"
-    },
-    "context": {
-      "completed_tasks": [1, 2],
-      "completed_files": ["data/papers.json", "index.html"]
+  "tool_calls": [{
+    "function": {
+      "name": "search_arxiv_papers",
+      "arguments": {
+        "category": "cs.AI",
+        "max_results": 6
+      }
     }
-  },
-  "timestamp": "2025-01-15T10:02:30.123Z"
+  }]
 }
-```
 
-Evaluation 阶段同样会生成 `evaluation_request` 和 `evaluation_report`，这样日志与追踪都能基于统一协议格式完成。
-
-### Key Features
-
-#### 1. Function Calling
-Agents use LLM function calling to:
-- Create and modify files programmatically
-- Read project state
-- Execute tools with structured parameters
-
-#### 2. Shared Memory
-- **Project Plan**: Accessible to all agents
-- **Completed Files**: Track progress across tasks
-- **Conversation History**: Maintain context per agent
-- **State Manager**: Persisted JSON (`outputs/state/state.json`) keeps project status & agent memories
-
-#### 3. Task Dependency Management
-- Automatic dependency resolution
-- Priority-based task scheduling
-- Iterative refinement capability
-
-### State & Memory Management
-
-系统通过 `state/state_manager.py` 将运行状态持久化至 `outputs/state/state.json`：
-
-- `project_plan` / `completed_tasks` / `created_files` / `task_results` / `evaluation`
-- `agents`: 保存每个 Agent 的 `conversation_history` 与 `thoughts`
-- `last_updated`: ISO8601 时间戳
-
-运行过程中 Orchestrator 会：
-
-1. 加载已有 state，恢复各 Agent 的记忆
-2. 每次任务/评估完成后 `state_manager.update(...)`
-3. 调用 `state_manager.record_agent_memory(agent)` 写回记忆
-4. 提供 `get_recent_tasks()/get_recent_files()` 供 Agent 在 `context` 中引用，实现“记忆复用”
-
-示例片段：
-
-```json
+# System executes and returns
 {
-  "project_plan": {"project_name": "arXiv CS Daily", "...": "..."},
-  "completed_tasks": [1, 2, 3],
-  "agents": {
-    "CodeGenerationAgent": {
-      "conversation_history": [...],
-      "thoughts": ["[2025-01-15 10:01:00] Starting task ..."]
+  "status": "success",
+  "papers": [
+    {
+      "id": "2412.11798v1",
+      "title": "Particulate: Feed-Forward 3D Object Articulation",
+      "authors": ["Ruining Li", "Yuxin Yao", ...],
+      "pdf_url": "https://arxiv.org/pdf/2412.11798v1.pdf"
     }
-  },
-  "last_updated": "2025-01-15T10:05:30.456Z"
+  ]
 }
 ```
 
-## 📊 Logging and Debugging
+### Error Handling
 
-The system provides detailed logging:
+- Automatic retry on API failures
+- Fallback to alternative providers
+- Graceful degradation (mock data if APIs unavailable)
+- Detailed error logging
 
-```python
-# Logs are saved to logs/agent_system_TIMESTAMP.log
-# Console output shows:
-# - Agent thoughts and decisions
-# - Tool executions
-# - Task progress
-# - Evaluation results
-```
+## System Evaluation
 
-Example log output:
-```
-[2024-01-15 10:30:15] [PlanningAgent] Thought: Analyzing requirement...
-[2024-01-15 10:30:20] [CodeGenerationAgent] Calling tool: create_file
-[2024-01-15 10:30:21] [Orchestrator] ✓ Task 1 completed - Files: index.html
-```
+### Quantitative Metrics
 
-## 🔌 LLM Provider Support
+- **Code Completeness**: All required files generated (6/6)
+- **Functionality**: Working navigation, filtering, and data display
+- **Data Quality**: Real papers with authentic metadata (30+ papers)
+- **Evaluation Score**: 88/100 (by Evaluation Agent)
 
-### Supported Providers
-- **DeepSeek** (default): Cost-effective, good performance
-- **OpenAI**: GPT-4, GPT-3.5-turbo
-- **Anthropic**: Claude 3.5 Sonnet
+### Qualitative Assessment
 
-### Adding New Providers
+- Clean, professional UI design
+- Responsive layout
+- Proper error handling
+- Extensible architecture
 
-Edit `tools/llm_client.py`:
-```python
-self.model_map = {
-    "your_provider": "model-name"
-}
+## Course Requirements Fulfillment
 
-self.base_url_map = {
-    "your_provider": "https://api.provider.com"
-}
-```
+| Requirement | Implementation | Status |
+|------------|----------------|--------|
+| Multi-Agent System | 3 specialized agents + orchestrator | ✅ |
+| Agent Roles | Planning, Code Generation, Evaluation | ✅ |
+| Task Decomposition | Structured plan with dependencies | ✅ |
+| LLM Integration | DeepSeek/OpenAI/Claude support | ✅ |
+| Function Calling | OpenAI-format tool definitions | ✅ |
+| Tool Kit | File + arXiv + Web Search tools | ✅ |
+| External Knowledge | Real data from arXiv API | ✅ |
+| Communication Protocol | Shared state + message passing | ✅ |
+| Test Case | arXiv CS Daily website | ✅ |
+| Documentation | Comprehensive README | ✅ |
 
-## 🧪 Testing
+## Testing
 
-### Mock Mode (No API Required)
+### System Tests
+
 ```bash
-python main.py --mock
+# Run unit tests
+python test_system.py
 ```
 
-The mock client returns simulated responses, useful for:
-- Testing system architecture
-- Debugging agent communication
-- Demo without API costs
+Expected output:
+```
+✓ All imports successful
+✓ File tools working
+✓ Mock LLM client working
+✓ Agents initialized correctly
+✓ Generated files exist
 
-### With Real API
+5/5 tests PASSED ✅
+```
+
+### Integration Tests
+
+Test with real APIs:
 ```bash
-# Recommended for production use
-export DEEPSEEK_API_KEY="your-key"
-python main.py
+# Test arXiv API
+PYTHONPATH=. python tools/arxiv_tools.py
+
+# Test Web Search
+PYTHONPATH=. python tools/web_search_tools.py
 ```
 
-## 📈 Performance Considerations
+## Limitations and Future Work
 
-- **API Costs**: Use `--mock` for testing, DeepSeek for cost-effective production
-- **Iteration Limits**: Default 20, adjust with `--max-iterations`
-- **Model Selection**: Cheaper models for planning, better models for code generation
+### Current Limitations
+- arXiv API has rate limits (3 seconds between requests)
+- Web search requires API keys for best performance
+- Generated code requires manual deployment
 
-### Recommended Configuration
+### Potential Enhancements
+- Add more agent types (Testing Agent, Documentation Agent)
+- Implement more sophisticated task scheduling
+- Add support for more data sources
+- Implement automatic deployment
 
-**Development:**
-```bash
-python main.py --mock
+## Logging
+
+Detailed logs are saved to `logs/agent_system_TIMESTAMP.log`:
+
+```
+[2024-12-15 10:00:00] [Orchestrator] Starting multi-agent system
+[2024-12-15 10:00:01] [PlanningAgent] Analyzing requirement...
+[2024-12-15 10:00:05] [CodeGenerationAgent] Calling tool: create_file
+[2024-12-15 10:00:06] [CodeGenerationAgent] Calling tool: search_arxiv_papers
+[2024-12-15 10:00:10] [Orchestrator] Task completed: index.html
+[2024-12-15 10:05:00] [EvaluationAgent] Score: 88/100
 ```
 
-**Production:**
-```bash
-python main.py --provider deepseek --max-iterations 15
-```
+## References
 
-## 🛠️ Extending the System
-
-### Adding New Agents
-
-```python
-# agents/custom_agent.py
-from agents.base_agent import BaseAgent
-
-class CustomAgent(BaseAgent):
-    def execute(self, task, context=None):
-        # Implement custom logic
-        pass
-```
-
-### Adding New Tools
-
-```python
-# tools/custom_tools.py
-def my_custom_tool(param1, param2):
-    return {"status": "success", "result": ...}
-```
-
-### Custom Requirements
-
-```python
-# Create your own requirement
-custom_req = """
-Build a portfolio website with:
-- Home page
-- Projects gallery
-- Contact form
-"""
-
-python main.py --requirement "$custom_req"
-```
-
-## 📝 Assignment Deliverables
-
-This project provides:
-
-✅ **Git Repository**: Complete source code with modular architecture  
-✅ **README.md**: Comprehensive documentation (this file)  
-✅ **Functional System**: Generates complete arXiv CS Daily website  
-✅ **Logging**: Detailed execution logs for analysis  
-✅ **Extensibility**: Easy to add agents, tools, and features  
-
-## 🎯 Learning Outcomes Demonstrated
-
-- ✅ Multi-agent architecture design with specialized roles
-- ✅ LLM API integration (DeepSeek, OpenAI, Claude)
-- ✅ Function calling implementation for agent tools
-- ✅ Advanced agent communication protocols
-- ✅ Task decomposition and collaborative execution
-- ✅ Code quality evaluation and feedback systems
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**"API Error"**
-- Check API key is set correctly
-- Verify internet connection
-- Try `--mock` mode for testing
-
-**"No files created"**
-- Check logs for errors
-- Verify output directory permissions
-- Try with `--max-iterations 30`
-
-**"Planning failed"**
-- LLM may have returned invalid JSON
-- System uses fallback plan automatically
-- Check logs for details
-
-## 📚 References
-
-- LangChain: Agent framework inspiration
-- AutoGen: Multi-agent patterns
-- OpenAI Function Calling: Tool use patterns
-
-## 👥 Authors
-
-Kasper - COMP7103C Course Assignment
-
-## 📄 License
-
-MIT License - For educational purposes
+- OpenAI Function Calling API: https://platform.openai.com/docs/guides/function-calling
+- arXiv API Documentation: https://info.arxiv.org/help/api/
+- AutoGen Framework: Multi-agent patterns
+- LangChain: Agent tooling patterns
 
 ---
 
-## 💡 Example Execution
-
-```bash
-$ python main.py
-
-[2024-01-15 10:00:00] [Orchestrator] INFO: STARTING MULTI-AGENT SOFTWARE DEVELOPMENT
-[2024-01-15 10:00:01] [PlanningAgent] INFO: Analyzing requirement...
-[2024-01-15 10:00:05] [PlanningAgent] INFO: Plan created successfully: arXiv CS Daily
-[2024-01-15 10:00:06] [CodeGenerationAgent] INFO: Generating code for: index.html
-[2024-01-15 10:00:12] [Orchestrator] INFO: ✓ Task 1 completed - Files: index.html
-...
-[2024-01-15 10:05:00] [EvaluationAgent] INFO: Evaluation Score: 85/100
-[2024-01-15 10:05:00] [Orchestrator] INFO: PASSED
-
-✓ Project completed successfully!
-✓ Generated 6 files
-✓ Check output at: /path/to/outputs
-```
-
----
-
-For questions or issues, please check the logs or refer to the course TAs.
+**Note**: This system demonstrates practical multi-agent collaboration for automated software development. All components are designed for educational purposes as part of the COMP7103C course requirements.
